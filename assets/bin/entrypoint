@@ -1,0 +1,7 @@
+#!/bin/bash
+#=====================
+# Environment variables
+#=====================
+
+ENTRYPOINT_ARGS="$@"
+PROJECT_DIR="/src"
