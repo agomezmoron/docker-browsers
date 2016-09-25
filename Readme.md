@@ -2,8 +2,8 @@
 
 Docker image to work with Firefox and Chrome.
 
-<img src="img/docker_logo.png" height="125" />
 <img src="img/firefox.jpg" height="125" />
+<img src="img/docker_logo.png" height="125" />
 <img src="img/chrome.png" height="125" />
 
 ## Table of Contents
