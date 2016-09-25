@@ -5,19 +5,19 @@ MAINTAINER Alejandro Gomez <agommor@gmail.com>
 # Build arguments
 #================================
 
-ARG FIREFOX_VERSION "47.0.1"
-ARG VNC_PASSWD 1234
+ARG FIREFOX_VERSION="47.0.1"
+ARG VNC_PASSWD=1234
 
 #================================
 # Env variables
 #================================
 
 ENV BUILD_TIMESTAMP 20160915_01
-ENV FIREFOX_VERSION $FIREFOX_VERSION
+ENV FIREFOX_VERSION ${FIREFOX_VERSION}
 ENV X11_RESOLUTION "1280x1024x24"
 ENV DISPLAY :1
 ENV GIT_URI ""
-ENV VNC_PASSWD "$VNC_PASSWORD"
+ENV VNC_PASSWD ${VNC_PASSWORD}
 
 ADD assets/etc/apt/apt.conf.d/99norecommends /etc/apt/apt.conf.d/99norecommends
 ADD assets/etc/apt/sources.list /etc/apt/sources.list
