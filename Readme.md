@@ -41,7 +41,7 @@ docker build --build-arg FIREFOX_VERSION=47.0.1 --build-arg VNC_PASSWD=1234 - -t
 You can pull the image from Docker:
 
 ```
-docker pull agomezmoron/docker-browsers (pending to be uploaded)
+docker pull agomezmoron/docker-browsers
 ```
 
 ## Docker Run
@@ -49,13 +49,13 @@ docker pull agomezmoron/docker-browsers (pending to be uploaded)
 Run the image with the following command:
 
 ```
-docker run --privileged -v /YOUR/TESTS/FOLDER:/src -p 90:8080  -e GULP_TASK="YOUR_GULP_TASK" -t -i agomezmoron/docker-gulp
+docker run --privileged -v /YOUR/TESTS/FOLDER:/src -t -i agomezmoron/docker-browsers
 ```
 
 or
 
 ```
-docker run --privileged -v /YOUR/TESTS/FOLDER:/src -p  -e GULP_TASK="YOUR_GULP_TASK" -d -t -i agomezmoron/docker-gulp
+docker run --privileged -v /YOUR/TESTS/FOLDER:/src -d -t -i agomezmoron/docker-browsers
 ```
 
 
