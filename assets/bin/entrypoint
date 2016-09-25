@@ -2,6 +2,16 @@
 #=====================
 # Environment variables
 #=====================
+set -x
 
+function run_xvfb() {
+        pgrep Xvfb || Xvfb $DISPLAY -screen 0 $X11_RESOLUTION &> /dev/null &
+}
+function run_x11vnc() {
+  pgrep x11vnc || x11vnc -display $DISPLAY -shared -xkb -skip_lockkeys -forever -noxdamage -passwd $VNC_PASSWD &> /dev/null &
+}
 ENTRYPOINT_ARGS="$@"
 PROJECT_DIR="/src"
+
+run_xvfb
+run_x11vnc

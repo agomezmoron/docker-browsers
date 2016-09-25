@@ -5,13 +5,15 @@ MAINTAINER Alejandro Gomez <agommor@gmail.com>
 # Build arguments
 #================================
 
+ARG FIREFOX_VERSION "47.0.1"
+ARG VNC_PASSWD 1234
+
 #================================
 # Env variables
 #================================
 
 ENV BUILD_TIMESTAMP 20160915_01
-ENV FIREFOX_VERSION "47.0.1"
-ENV VNC_PASSWORD 1234
+ENV FIREFOX_VERSION $FIREFOX_VERSION
 ENV X11_RESOLUTION "1280x1024x24"
 ENV DISPLAY :1
 ENV GIT_URI ""
@@ -40,4 +42,4 @@ RUN  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
 # Adding the entrypoint
 COPY ./assets/bin/entrypoint /
 RUN chmod +x /entrypoint
-#ENTRYPOINT ["/entrypoint"]
+ENTRYPOINT ["/entrypoint"]
