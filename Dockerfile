@@ -20,6 +20,7 @@ ENV VNC_PASSWD "$VNC_PASSWORD"
 ADD assets/etc/apt/apt.conf.d/99norecommends /etc/apt/apt.conf.d/99norecommends
 ADD assets/etc/apt/sources.list /etc/apt/sources.list
 
+# Installing Firefox
 RUN apt-get update -y --fix-missing -qq \
   && DEBIAN_FRONTEND=noninteractive DEBCONF_PRIORITY=critical apt-get install -y wget libgtk-3-0 openjdk-8-jdk maven openssh-client git vim xvfb x11vnc
   # Firefox installation
@@ -28,8 +29,15 @@ RUN apt-get update -y --fix-missing -qq \
   && ln -s /usr/local/firefox/firefox /usr/bin/firefox \
   && apt-get install -y libdbus-glib-1-2
 
+# Install Chromium.
+RUN  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
+  && apt-get update \
+  && apt-get install -y google-chrome-stable \
+  && rm -rf /var/lib/apt/lists/*
+
 
 # Adding the entrypoint
 COPY ./assets/bin/entrypoint /
 RUN chmod +x /entrypoint
-ENTRYPOINT ["/entrypoint"]
+#ENTRYPOINT ["/entrypoint"]
