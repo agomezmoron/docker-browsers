@@ -24,6 +24,8 @@ ADD assets/etc/apt/sources.list /etc/apt/sources.list
 
 # Installing Firefox
 RUN apt-get update -y --fix-missing -qq \
+  && apt-get instal software-properties-common python-software-properties \
+  && add-apt-repository ppa:openjdk-r/ppa -y \
   && DEBIAN_FRONTEND=noninteractive DEBCONF_PRIORITY=critical apt-get install -y wget libgtk-3-0 openjdk-8-jdk maven openssh-client git vim xvfb x11vnc
   # Firefox installation
   && wget -q http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 -O /tmp/firefox.tar.bz2 \
