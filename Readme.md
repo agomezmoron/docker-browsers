@@ -1,10 +1,10 @@
 # Docker Gulp image
 
-Docker image to work with npm, gulp and bower stack. You can use it to work with, for example, AngularJS.
+Docker image to work with Firefox and Chrome.
 
 <img src="img/docker_logo.png" height="125" />
-<img src="img/npmbower_logo.png" height="125" />
-<img src="img/sass_logo.png" height="125" />
+<img src="img/firefox.png" height="125" />
+<img src="img/chrome.png" height="125" />
 
 ## Table of Contents
   - [Requirements](#requirements)
@@ -27,7 +27,13 @@ There are two options to build the image:
 You can build the app from this directory running:
 
 ```
-docker build -t agomezmoron/docker-gulp-angular .
+docker build -t agomezmoron/docker-browsers .
+```
+
+If you want to choose a custom Firefox version and/or defining the VNC password:
+
+```
+docker build --build-arg FIREFOX_VERSION=47.0.1 --build-arg VNC_PASSWD=1234 - -t agomezmoron/docker-browsers .
 ```
 
 ### 2) Pulling from Docker
@@ -35,7 +41,7 @@ docker build -t agomezmoron/docker-gulp-angular .
 You can pull the image from Docker:
 
 ```
-docker pull agomezmoron/docker-gulp
+docker pull agomezmoron/docker-browsers (pending to be uploaded)
 ```
 
 ## Docker Run
@@ -43,16 +49,15 @@ docker pull agomezmoron/docker-gulp
 Run the image with the following command:
 
 ```
-docker run --privileged -v /YOUR/SOURCES/FOLDER:/src -p 90:8080  -e GULP_TASK="YOUR_GULP_TASK" -t -i agomezmoron/docker-gulp
+docker run --privileged -v /YOUR/TESTS/FOLDER:/src -p 90:8080  -e GULP_TASK="YOUR_GULP_TASK" -t -i agomezmoron/docker-gulp
 ```
 
 or
 
 ```
-docker run --privileged -v /YOUR/SOURCES/FOLDER:/src -p 90:8080  -e GULP_TASK="YOUR_GULP_TASK" -d -t -i agomezmoron/docker-gulp
+docker run --privileged -v /YOUR/TESTS/FOLDER:/src -p  -e GULP_TASK="YOUR_GULP_TASK" -d -t -i agomezmoron/docker-gulp
 ```
 
-And you will have your docker running on the 90 port.
 
 **Important:** If you are running Docker on Windwos, please check you have the shared drives enabled:
 
