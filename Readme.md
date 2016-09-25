@@ -1,4 +1,4 @@
-# Docker Gulp image
+# Docker Browsers image
 
 Docker image to work with Firefox and Chrome.
 
