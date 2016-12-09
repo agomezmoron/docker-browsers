@@ -67,6 +67,8 @@ You can also define the screen resolution by setting the variables (-e option):
 
  * SCREEN_WIDTH
  * SCREEN_HEIGHT
+ 
+The DOCKER_TESTS_COMMAND is an optional variable to perform some automatic test (ex: Selenium + TestNG + Maven). VNC is installed to connect with the Docker container if you need to use an specific version of Firefox and/or Chrome to test something without instaling them in your laptop.
 
 **Important:** If you are running Docker on Windwos, please check you have the shared drives enabled:
 
