@@ -4,14 +4,42 @@
 #=====================
 set -x
 
+DEFAULT_SCREEN_WIDTH=1200
+DEFAULT_SCREEN_HEIGHT=768
+
 function run_xvfb() {
-        pgrep Xvfb || Xvfb $DISPLAY -screen 0 $X11_RESOLUTION &> /dev/null &
+  # changing the widh and height if needed
+  X11_SCREEN_WIDTH=DEFAULT_SCREEN_WIDTH
+  if [ -v SCREEN_WIDTH ]
+  then
+    X11_SCREEN_WIDTH = SCREEN_WIDTH
+  fi
+
+  X11_SCREEN_HEIGHT=DEFAULT_SCREEN_HEIGHT
+  if [ -v SCREEN_HEIGHT ]
+  then
+    X11_SCREEN_HEIGHT = SCREEN_HEIGHT
+  fi
+
+  X11_RESOLUTION="$X11_SCREEN_WIDTHx$X11_SCREEN_HEIGHTx24"
+
+  pgrep Xvfb || Xvfb $DISPLAY -screen 0 $X11_RESOLUTION &> /dev/null &
 }
 function run_x11vnc() {
   pgrep x11vnc || x11vnc -display $DISPLAY -shared -xkb -skip_lockkeys -forever -noxdamage -passwd $VNC_PASSWD &> /dev/null &
 }
+
 ENTRYPOINT_ARGS="$@"
 PROJECT_DIR="/src"
 
+
+# starting xvfb and x11vnc
 run_xvfb
 run_x11vnc
+
+# Running commands for tests
+if [ -v DOCKER_TESTS_COMMAND ]
+then
+  # perform the command
+  /bin/bash --login -c "$DOCKER_TESTS_COMMAND"
+fi
