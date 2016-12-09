@@ -6,6 +6,7 @@ MAINTAINER Alejandro Gomez <agommor@gmail.com>
 #================================
 
 ARG FIREFOX_VERSION="47.0.1"
+ARG CHROME_VERSION="google-chrome-stable"
 ARG VNC_PASSWD=1234
 
 #================================
@@ -14,6 +15,7 @@ ARG VNC_PASSWD=1234
 
 ENV BUILD_TIMESTAMP 20160915_01
 ENV FIREFOX_VERSION ${FIREFOX_VERSION}
+ENV CHROME_VERSION ${CHROME_VERSION}
 ENV X11_RESOLUTION "1280x1024x24"
 ENV DISPLAY :1
 ENV VNC_PASSWD ${VNC_PASSWORD}
@@ -35,11 +37,12 @@ RUN apt-get update -y --fix-missing -qq \
   && apt-get install -y libdbus-glib-1-2
 
 # Install Chromium.
-RUN  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
-  && apt-get update \
-  && apt-get install -y google-chrome-stable \
-  && rm -rf /var/lib/apt/lists/*
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+  && apt-get update -qqy \
+  && apt-get -qqy install ${CHROME_VERSION:-google-chrome-stable} \
+  && rm /etc/apt/sources.list.d/google-chrome.list \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 
 # Adding the entrypoint
