@@ -33,12 +33,17 @@ docker build -t agomezmoron/docker-browsers .
 If you want to choose a custom Firefox version and/or defining the VNC password:
 
 ```
-docker build --build-arg FIREFOX_VERSION=47.0.1 --build-arg VNC_PASSWD=1234 - -t agomezmoron/docker-browsers .
+docker build --build-arg FIREFOX_VERSION=47.0.1 --build-arg CHROME_VERSION=55.0.2883 --build-arg VNC_PASSWD=1234 - -t agomezmoron/docker-browsers .
 ```
+
+You can check the avaiable versions on:
+
+ * [Mozilla Firefox versions](https://www.mozilla.org/en-US/firefox/releases/)
+ * [Google Chrome versions](https://en.wikipedia.org/wiki/Google_Chrome_version_history)
 
 ### 2) Pulling from Docker
 
-You can pull the image from Docker:
+You can pull the image from Docker (by default has Firefox 47.0.1 Chrome 55.0.2883 installed):
 
 ```
 docker pull agomezmoron/docker-browsers
@@ -49,15 +54,19 @@ docker pull agomezmoron/docker-browsers
 Run the image with the following command:
 
 ```
-docker run --privileged -v /YOUR/TESTS/FOLDER:/src -t -i agomezmoron/docker-browsers
+docker run --privileged -v /YOUR/TESTS/FOLDER:/src -e DOCKER_TESTS_COMMAND="mvn test -PFirefox,Regression" -t -i agomezmoron/docker-browsers
 ```
 
 or
 
 ```
-docker run --privileged -v /YOUR/TESTS/FOLDER:/src -d -t -i agomezmoron/docker-browsers
+docker run --privileged -v /YOUR/TESTS/FOLDER:/src -e DOCKER_TESTS_COMMAND="mvn test -PFirefox,Regression" -d -t -i agomezmoron/docker-browsers
 ```
 
+You can also define the screen resolution by setting the variables (-e option):
+
+ * SCREEN_WIDTH
+ * SCREEN_HEIGHT
 
 **Important:** If you are running Docker on Windwos, please check you have the shared drives enabled:
 
