@@ -49,15 +49,19 @@ docker pull agomezmoron/docker-browsers
 Run the image with the following command:
 
 ```
-docker run --privileged -v /YOUR/TESTS/FOLDER:/src -t -i agomezmoron/docker-browsers
+docker run --privileged -v /YOUR/TESTS/FOLDER:/src -e DOCKER_TESTS_COMMAND="mvn test -PFirefox,Regression" -t -i agomezmoron/docker-browsers
 ```
 
 or
 
 ```
-docker run --privileged -v /YOUR/TESTS/FOLDER:/src -d -t -i agomezmoron/docker-browsers
+docker run --privileged -v /YOUR/TESTS/FOLDER:/src -e DOCKER_TESTS_COMMAND="mvn test -PFirefox,Regression" -d -t -i agomezmoron/docker-browsers
 ```
 
+You can also define the screen resolution by setting the variables (-e option):
+
+ * SCREEN_WIDTH
+ * SCREEN_HEIGHT
 
 **Important:** If you are running Docker on Windwos, please check you have the shared drives enabled:
 
