@@ -33,12 +33,17 @@ docker build -t agomezmoron/docker-browsers .
 If you want to choose a custom Firefox version and/or defining the VNC password:
 
 ```
-docker build --build-arg FIREFOX_VERSION=47.0.1 --build-arg VNC_PASSWD=1234 - -t agomezmoron/docker-browsers .
+docker build --build-arg FIREFOX_VERSION=47.0.1 --build-arg CHROME_VERSION=55.0.2883 --build-arg VNC_PASSWD=1234 - -t agomezmoron/docker-browsers .
 ```
+
+You can check the avaiable versions on:
+
+ * [Mozilla Firefox versions](https://www.mozilla.org/en-US/firefox/releases/)
+ * [Google Chrome versions](https://en.wikipedia.org/wiki/Google_Chrome_version_history)
 
 ### 2) Pulling from Docker
 
-You can pull the image from Docker:
+You can pull the image from Docker (by default has Firefox 47.0.1 Chrome 55.0.2883 installed):
 
 ```
 docker pull agomezmoron/docker-browsers
