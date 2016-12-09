@@ -1,0 +1,14 @@
+node_modules/
+bower_components/
+/nbproject/
+dist/
+reports
+coverage
+target
+**/*min*
+.idea
+!gulp/**/*
+/scripts/app/templates/
+/webpack/
+/assets/styles/
+/assets/locale/i18n/
