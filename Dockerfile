@@ -48,4 +48,5 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 # Adding the entrypoint
 COPY ./assets/bin/entrypoint /
 RUN chmod +x /entrypoint
+EXPOSE 5900
 ENTRYPOINT ["/entrypoint"]
