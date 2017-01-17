@@ -10,15 +10,15 @@ DEFAULT_SCREEN_HEIGHT=768
 function run_xvfb() {
   # changing the widh and height if needed
   X11_SCREEN_WIDTH=DEFAULT_SCREEN_WIDTH
-  if [ -v SCREEN_WIDTH ]
+  if [ -n "$SCREEN_WIDTH" ]
   then
-    X11_SCREEN_WIDTH = SCREEN_WIDTH
+    X11_SCREEN_WIDTH = $SCREEN_WIDTH
   fi
 
   X11_SCREEN_HEIGHT=DEFAULT_SCREEN_HEIGHT
-  if [ -v SCREEN_HEIGHT ]
+  if [ -n "$SCREEN_HEIGHT" ]
   then
-    X11_SCREEN_HEIGHT = SCREEN_HEIGHT
+    X11_SCREEN_HEIGHT = $SCREEN_HEIGHT
   fi
 
   X11_RESOLUTION="$X11_SCREEN_WIDTHx$X11_SCREEN_HEIGHTx24"
@@ -38,7 +38,7 @@ run_xvfb
 run_x11vnc
 
 # Running commands for tests
-if [ -v DOCKER_TESTS_COMMAND ]
+if [ -n "$DOCKER_TESTS_COMMAND" ]
 then
   # perform the command
   /bin/bash --login -c "$DOCKER_TESTS_COMMAND"
