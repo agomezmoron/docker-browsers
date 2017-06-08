@@ -1,4 +1,19 @@
-docker-appium:
-  build: ./
-  volumes:
-  - $PWD:/src
+version: '2'
+services:
+  docker-browsers:
+    image: docker-browsers:0.1
+    container_name: docker-browsers
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        - FIREFOX_VERSION=47.0.1
+        - CHROME_VERSION=google-chrome-stable
+        - DISPLAY=${DISPLAY}
+        - HOST_USER_UID=1000
+        - HOST_USER_GID=1000
+    environment:
+      - DOCKER_TESTS_COMMAND="/usr/bin/firefox"
+    volumes:
+      - /path/to/folder:/src
+    network_mode: "host"
