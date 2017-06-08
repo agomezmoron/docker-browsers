@@ -4,8 +4,6 @@
 #=====================
 set -x
 
-export DISPLAY=:3
-
 function run_xvfb() {
         killall Xvfb && pgrep Xvfb || Xvfb $DISPLAY -screen 0 $X11_RESOLUTION &> /dev/null &
 }
