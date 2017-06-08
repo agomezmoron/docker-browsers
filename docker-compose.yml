@@ -1,4 +1,21 @@
-docker-appium:
-  build: ./
-  volumes:
-  - $PWD:/src
+version: '2'
+services:
+  docker-browsers:
+    image: docker-browsers:0.1
+    container_name: docker-browsers
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        - FIREFOX_VERSION=47.0.1
+        - CHROME_VERSION=google-chrome-stable
+        - VNC_PASSWD=1234
+        - X11_RESOLUTION=1280x1024x24
+    environment:
+      - DOCKER_TESTS_COMMAND=firefox
+      - DISPLAY=${DISPLAY} #Use ${DISPLAY} here to run the browser on the host; use :X (being X a different number from host display) to run it inside docker and connect through VNC
+    volumes:
+      - /path/to/folder:/src
+    network_mode: "host"
+    ports:
+      - 5900:5900
