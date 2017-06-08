@@ -12,5 +12,5 @@ if [ -n "$DOCKER_TESTS_COMMAND" ]
 then
   cd $PROJECT_DIR
   # perform the command
-  /bin/bash --login -c "$DOCKER_TESTS_COMMAND"
+  /bin/bash --login -c $DOCKER_TESTS_COMMAND
 fi
